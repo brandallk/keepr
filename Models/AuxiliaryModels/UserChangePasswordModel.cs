@@ -4,7 +4,7 @@ namespace keepr.Models.AuxiliaryModels
 {
     public class UserChangePasswordModel
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [MaxLength(255), EmailAddress]
         public string Email { get; set; }

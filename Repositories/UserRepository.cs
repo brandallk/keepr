@@ -15,28 +15,40 @@ namespace keepr.Repositories
 
     public UserReturnModel Register(UserRegisterModel creds)
     {
-      creds.Password = BCrypt.Net.BCrypt.HashPassword(creds.Password);
+      Guid randomStringId = Guid.NewGuid();
+
+      User user = new User()
+      {
+        Id = randomStringId.ToString(),
+        Username = creds.Username,
+        Email = creds.Email,
+        Password = BCrypt.Net.BCrypt.HashPassword(creds.Password)
+      };
 
       try
       {
-        int id = _db.ExecuteScalar<int>(@"
-        INSERT INTO users (Username, Email, Password)
-        VALUES (@Username, @Email, @Password);
+        var rowsAffected = _db.Execute(@"
+        INSERT INTO users (Id, Username, Email, Password)
+        VALUES (@Id, @Username, @Email, @Password);
         SELECT LAST_INSERT_ID();
-        ", creds);
+        ", user);
 
-        return new UserReturnModel()
+        if (rowsAffected > 0)
         {
-          Id = id,
-          Username = creds.Username,
-          Email = creds.Email
-        };
+          return new UserReturnModel()
+          {
+            Id = user.Id,
+            Username = user.Username,
+            Email = user.Email
+          };
+        }
       }
       catch (MySqlException e)
       {
         Console.WriteLine("ERROR: {0}", e.Message);
         return null;
       }
+      return null;
     }
 
     public UserReturnModel Login(UserLoginModel creds)
