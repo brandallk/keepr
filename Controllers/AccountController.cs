@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -20,11 +21,11 @@ namespace keepr.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<UserReturnModel> Register([FromBody] UserRegisterModel creds)
+        public async Task<UserReturnModel> Register([FromBody] UserRegisterModel formData)
         {
             if (ModelState.IsValid)
             {
-                UserReturnModel user = _repo.Register(creds);
+                UserReturnModel user = _repo.Register(formData);
                 if (user != null)
                 {
                     ClaimsPrincipal principal = user.SetClaims();
@@ -36,11 +37,16 @@ namespace keepr.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<UserReturnModel> Login([FromBody] UserLoginModel creds)
+        public async Task<UserReturnModel> Login([FromBody] UserLoginModel formData)
         {
+            if (formData == null)
+            {
+                throw new System.ArgumentNullException(nameof(formData));
+            }
+
             if (ModelState.IsValid)
             {
-                UserReturnModel user = _repo.Login(creds);
+                UserReturnModel user = _repo.Login(formData);
                 if (user != null)
                 {
                     ClaimsPrincipal principal = user.SetClaims();
@@ -55,8 +61,19 @@ namespace keepr.Controllers
         public UserReturnModel Authenticate()
         {
             var user = HttpContext.User;
-            var id = user.Identity.Name;
-            return _repo.GetUserById(id);
+            if (user.Identity.Name != null)
+            {
+                var id = user.Identity.Name;
+                return _repo.GetUserById(id);
+            }
+            return null;
+        }
+
+        [HttpDelete("logout")]
+        public async Task<string> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return "User logged out";
         }
 
         [Authorize] // Only allow a signed-in user to visit this route
