@@ -24,11 +24,41 @@ CREATE TABLE keeps (
   name VARCHAR(20) NOT NULL,
   description VARCHAR(255) NOT NULL,
   userId VARCHAR(255),
+
+  -- new
+  imageUrl VARCHAR(255) NOT NULL,
+  link VARCHAR(255) NOT NULL,
+  public TINYINT(1) NOT NULL,
+  keepCount int NOT NULL,
+  shareCount int NOT NULL,
+  viewCount int NOT NULL,
+
   INDEX userId (userId),
   FOREIGN KEY (userId)
     REFERENCES users(id)
     ON DELETE CASCADE,
   PRIMARY KEY (id)
+);
+
+-- new
+CREATE TABLE tags (
+  id int NOT NULL AUTO_INCREMENT,
+  name VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id)
+);
+
+-- new
+CREATE TABLE keeptags (
+  id int NOT NULL AUTO_INCREMENT,
+  keepId int NOT NULL,
+  tagId int NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (keepId)
+    REFERENCES keeps(id)
+    ON DELETE CASCADE,
+  FOREIGN KEY (tagId)
+    REFERENCES tags(id)
+    ON DELETE CASCADE
 );
 
 CREATE TABLE vaultkeeps (
