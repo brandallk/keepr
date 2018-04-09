@@ -195,12 +195,55 @@ var store = new Vuex.Store({
   actions: {
 
     createKeep({commit, dispatch}, formData) {
+      var tags = []
+      if (formData.tags) {
+        tags = formData.tags
+        delete formData.tags // 'tags' do not appear in 'keep' model
+      }
       api.post('keeps', formData)
       .then(res => {
         console.log('post new keep res', res)
         var newKeep = res.data
         console.log('new keep', newKeep)
         commit('addToMyKeeps', newKeep)
+
+        tags.forEach(tag => {
+          var keepTag = {}
+          // determine if the tag already exists
+          api.get(`tags/${tag}`) // Get tag by name
+          .then(res => {
+            var existingTag = res.data
+            console.log('existingTag', existingTag)
+            // if it doesn't, create a new tag
+            if (!existingTag) {
+              console.log('tag', tag)
+              api.post('tags', { Name: tag })
+              .then(res => {
+                var newTag = res.data
+                keepTag = { KeepId: newKeep.id, TagId: newTag.id }
+                // either way, create a new keeptags for the relationship
+                api.post('keeptags', keepTag)
+                .then(res => {
+                  var newKeepTag = res.data
+                  console.log('newKeepTag', newKeepTag)
+                })
+                .catch(err => { console.log(err) })
+              })
+              .catch(err => { console.log(err) })
+            }
+            else {
+              keepTag = { KeepId: newKeep.id, TagId: existingTag.id }
+              // either way, create a new keeptags for the relationship
+              api.post('keeptags', keepTag)
+              .then(res => {
+                var newKeepTag = res.data
+                console.log('newKeepTag', newKeepTag)
+              })
+              .catch(err => { console.log(err) })
+            }
+          })
+          .catch(err => { console.log(err) })
+        })
       })
       .catch(err => {
         console.log(err)

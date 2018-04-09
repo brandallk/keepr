@@ -20,6 +20,10 @@
         <input type="text" class="form-control" name="link" v-model="form.Link" required>
       </div>
       <div class="form-group">
+        <label for="tags">Tags: </label>
+        <input type="text" class="form-control" name="tags" v-model="tags">
+      </div>
+      <div class="form-group">
         <label for="public">Set Access to "Public"? </label>
         <input class="ml-2" type="checkbox" name="public" v-model="form.Public">
       </div>
@@ -46,7 +50,8 @@
           ImageUrl: "",
           Link: "",
           Public: false
-        }
+        },
+        tags: ""
       }
     },
     computed: {
@@ -60,7 +65,14 @@
         formData.KeepCount = 0
         formData.ShareCount = 0
         formData.ViewCount = 0
+
+        if (this.tags) {
+          var tags = this.tags.replace(/(\s)*/g, "").split(",")
+          formData.tags = tags
+        }
+
         this.$store.dispatch('createKeep', formData)
+
         this.cancel()
       },
       cancel() {
@@ -71,6 +83,7 @@
           Link: "",
           Public: false
         }
+        this.tags = ""
       }
     }
   }
