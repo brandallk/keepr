@@ -19,7 +19,7 @@ export default {
         console.log('Registered a new user:', newUser)
         commit('setUser', newUser)
         commit('setAuthError', {error: false, message: ''})
-        router.push({name: 'Home'})
+        // router.push({name: 'Home'})
       })
       .catch(err => {
         console.log(err)
@@ -38,7 +38,7 @@ export default {
         if (user.username) {
           commit('setUser', user)
           commit('setAuthError', {error: false, message: ''})
-          router.push({name: 'Home'})
+          // router.push({name: 'Home'})
         }
         else {
           commit('setAuthError', {
@@ -64,7 +64,7 @@ export default {
           console.log('User returned to session:', returningUser)
           commit('setUser', returningUser)
           commit('setAuthError', {error: false, message: ''})
-          router.push({name: 'Home'})
+          // router.push({name: 'Home'})
         }
         else {
           console.log('Could not authenticate user')

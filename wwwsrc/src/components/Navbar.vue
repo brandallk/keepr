@@ -5,19 +5,23 @@
     <div class="title-bar w-100 p-4 border-bottom border-primary">
   
       <div class="container-fluid d-flex align-content-center">
-        <img class="logo" src="../assets/logo.svg" alt="keepr logo" v-if="!sessionUser">
-        <span class="h3 mb-0" v-if="sessionUser">{{sessionUser}}'s Dashboard</span>
+        <img class="logo" src="../assets/logo.svg" alt="keepr logo" v-if="currentRouteIsWelcome">
+        <span class="h3 mb-0" v-if="!currentRouteIsWelcome">{{sessionUser}}'s Dashboard</span>
   
         <button class="btn btn-primary ml-auto" v-if="!sessionUser" @click="openRegisterModal">register</button>
   
         <button class="btn btn-primary ml-2" v-if="!sessionUser" @click="openLoginModal">log in</button>
+
+        <button class="btn btn-primary ml-auto" v-if="sessionUser && currentRouteIsWelcome" @click="redirectToHome">my dashboard</button>
+
+        <button class="btn btn-primary ml-auto" v-if="sessionUser && !currentRouteIsWelcome" @click="redirectToWelcome">welcome page</button>
   
-        <button class="btn btn-danger ml-auto" v-if="sessionUser" @click="logout">log out</button>
+        <button class="btn btn-danger ml-2" v-if="sessionUser" @click="logout">log out</button>
       </div>
         
     </div>
 
-    <div class="menu-bar row w-100 mx-0" v-if="sessionUser">
+    <div class="menu-bar row w-100 mx-0" v-if="!currentRouteIsWelcome">
       <div class="menu-option col-12 col-md-3 p-3 text-center text-white" :class="{ selected: selectedMenuOption == 'my-keeps' }" @click="dataSelectedMenuOption = 'my-keeps'">
         My Keeps
       </div>
@@ -68,6 +72,9 @@
       },
       selectedMenuOption() {
         return this.dataSelectedMenuOption
+      },
+      currentRouteIsWelcome() {
+        return this.$route.name === 'Welcome'
       }
     },
     methods: {
@@ -81,6 +88,12 @@
         if (this.sessionUser) {
           this.$store.dispatch('logout')
         }
+      },
+      redirectToHome() {
+        this.$router.push({name: 'Home'})
+      },
+      redirectToWelcome() {
+        this.$router.push({name: 'Welcome'})
       }
     }
   }
