@@ -174,6 +174,32 @@ var store = new Vuex.Store({
         shareCount: 0,
         viewCount: 0
       }
+    ],
+    myVaults: [
+      {
+        id: 1,
+        name: "Buildings",
+        description: "Buildings found on Atlas Obscura",
+        userId: "438e427f-d750-4577-bc87-01316733104f"
+      },
+      {
+        id: 2,
+        name: "Nature",
+        description: "Natural locations found on Atlas Obscura",
+        userId: "438e427f-d750-4577-bc87-01316733104f"
+      },
+      {
+        id: 3,
+        name: "Photography",
+        description: "Examples involving photography",
+        userId: "df6b0c2d-b9fc-417e-ba4c-5ffb763e92ee"
+      },
+      {
+        id: 4,
+        name: "Stone",
+        description: "Examples involving stone",
+        userId: "df6b0c2d-b9fc-417e-ba4c-5ffb763e92ee"
+      }
     ]
   },
 
