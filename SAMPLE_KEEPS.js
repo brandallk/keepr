@@ -1,7 +1,7 @@
 var keeps = [
   // Belong to user "Benjamen" (email: b@b.com, pswd: password)
   {
-    id: 1001,
+    id: 21,
     name: 'The Wave',
     description: 'Rippling sand dunes frozen in the Arizona rock.',
     userId: 'df6b0c2d-b9fc-417e-ba4c-5ffb763e92ee',
@@ -13,7 +13,7 @@ var keeps = [
     viewCount: 0
   },
   {
-    id: 1002,
+    id: 22,
     name: 'What Makes a Tree a Tree?',
     description: 'In Knowable Magazine, Rachel Ehrenberg writes about the tricky business of understanding what a tree is.',
     userId: 'df6b0c2d-b9fc-417e-ba4c-5ffb763e92ee',
@@ -26,7 +26,7 @@ var keeps = [
     viewCount: 0
   },
   {
-    id: 1003,
+    id: 23,
     name: 'Unknown Soviet photographer',
     description: 'Masha Ivashintsova was a photographer based in Leningrad who, when she died in 2000, left over 30,000 photographs.',
     userId: 'df6b0c2d-b9fc-417e-ba4c-5ffb763e92ee',
@@ -39,7 +39,7 @@ var keeps = [
     viewCount: 0
   },
   {
-    id: 1004,
+    id: 24,
     name: 'Earth’s Wonders Like You’ve Never Seen',
     description: 'Here’s a series of experimental, off-angle images that capture some of the world’s most stunning vertical features.',
     userId: 'df6b0c2d-b9fc-417e-ba4c-5ffb763e92ee',
@@ -51,7 +51,7 @@ var keeps = [
     viewCount: 0
   },
   {
-    id: 1005,
+    id: 25,
     name: 'The Missing Building Blocks of the Web',
     description: 'At a time when millions are losing trust in the the web’s biggest sites, it’s worth revisiting the idea that the web was supposed to be made out of countless little sites.',
     userId: 'df6b0c2d-b9fc-417e-ba4c-5ffb763e92ee',
@@ -63,7 +63,7 @@ var keeps = [
     viewCount: 0
   },
   {
-    id: 1006,
+    id: 26,
     name: 'Espresso Coffee Soda',
     description: 'A dark soda with a dark history.',
     userId: 'df6b0c2d-b9fc-417e-ba4c-5ffb763e92ee',
@@ -148,13 +148,13 @@ var keeps = [
     viewCount: 0
   },
   {
-    id: 1013,
+    id: 20,
     name: 'Museum of Neon Art',
     description: 'A one-of-a-kind collection of a unique medium.',
     userId: '438e427f-d750-4577-bc87-01316733104f',
     imageUrl: 'https://assets.atlasobscura.com/media/W1siZiIsInVwbG9hZHMvcGxhY2VfaW1hZ2VzL25lb24xLmpwZyJdLFsicCIsInRodW1iIiwieDM5MD4iXSxbInAiLCJjb252ZXJ0IiwiLXF1YWxpdHkgODEgLWF1dG8tb3JpZW50Il1d/neon1.jpg',
     link: 'https://www.atlasobscura.com/places/museum-neon-art-g',
-    public: 0,
+    public: 1,
     keepCount: 0,
     shareCount: 0,
     viewCount: 0

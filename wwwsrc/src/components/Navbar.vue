@@ -17,7 +17,7 @@
         
     </div>
 
-    <div class="menu-bar row w-100 mx-0">
+    <div class="menu-bar row w-100 mx-0" v-if="sessionUser">
       <div class="menu-option col-12 col-md-3 p-3 text-center text-white" :class="{ selected: selectedMenuOption == 'my-keeps' }" @click="dataSelectedMenuOption = 'my-keeps'">
         My Keeps
       </div>

@@ -192,6 +192,9 @@ var store = new Vuex.Store({
     },
     addToMyKeeps(state, keep) {
       state.myKeeps.push(keep)
+    },
+    setPublicKeeps(state, keeps) {
+      state.publicKeeps = keeps
     }
   },
 
@@ -258,6 +261,18 @@ var store = new Vuex.Store({
         var myKeeps = res.data
         console.log('MyKeeps from DB:', myKeeps)
         commit('setMyKeeps', myKeeps)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+
+    getPublicKeeps({commit, dispatch}) {
+      api.get('keeps/public')
+      .then(res => {
+        var publicKeeps = res.data
+        console.log('PublicKeeps from DB:', publicKeeps)
+        commit('setPublicKeeps', publicKeeps)
       })
       .catch(err => {
         console.log(err)

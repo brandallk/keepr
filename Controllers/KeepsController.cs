@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using keepr.Models;
 using keepr.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,12 @@ namespace keepr.Controllers
                 return _repo.CreateOne(keep);
             }
             return null;
+        }
+
+        [HttpGet("public")]
+        public List<Keep> GetPublicKeeps()
+        {
+            return _repo.GetPublicKeeps();
         }
     }
 }

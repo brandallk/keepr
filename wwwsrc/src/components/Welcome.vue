@@ -18,6 +18,9 @@
       'navbar': Navbar,
       'keeps-wall': KeepsWall
     },
+    mounted() {
+      this.$store.dispatch('getPublicKeeps')
+    },
     props: [],
     data() {
       return {

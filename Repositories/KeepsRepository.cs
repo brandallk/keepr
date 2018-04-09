@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using keepr.Models;
@@ -22,6 +24,15 @@ namespace keepr.Repositories
 
             keep.Id = id;
             return keep;
+        }
+
+        public List<Keep> GetPublicKeeps()
+        {
+            int isPublic = 1; // "Public" == 1 for public keeps
+            return _db.Query<Keep>(@"
+            SELECT * FROM keeps
+            WHERE public=@Public
+            ", new { Public = isPublic }).ToList();
         }
     }
 }
