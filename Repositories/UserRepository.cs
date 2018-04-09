@@ -126,7 +126,7 @@ namespace keepr.Repositories
     {
       return _db.Query<Keep>(@"
       SELECT * FROM keeps
-      WHERE id=@Id
+      WHERE userId=@Id
       ", new { Id = id }).ToList();
     }
 

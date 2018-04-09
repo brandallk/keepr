@@ -27,7 +27,25 @@
       'create-keep-form': CreateKeepForm
     },
     mounted() {
-      this.$store.dispatch('getMyKeeps', this.$store.state.user.id)
+      waitForSessionUser(this) // Wait briefly to make sure the session user has a defined value...
+      .then(userId => { // ...then get the user's keeps
+        this.$store.dispatch('getMyKeeps', userId)
+      })
+      function waitForSessionUser(ctx) {
+        return new Promise((resolve, reject) => {
+          waitForData(ctx)
+          function waitForData(ctx) {
+            setTimeout(() => {
+              if (ctx.$store.state.user.id) {
+                resolve(ctx.$store.state.user.id)
+              }
+              else {
+                waitForData(ctx)
+              }
+            }, 50)
+          }
+        })
+      }
     },
     props: [],
     data() {

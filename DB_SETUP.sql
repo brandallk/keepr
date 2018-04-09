@@ -1,6 +1,6 @@
 CREATE TABLE users (
   id VARCHAR(255) NOT NULL,
-  username VARCHAR(20) NOT NULL,
+  username VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
   PRIMARY KEY (id),
@@ -9,7 +9,7 @@ CREATE TABLE users (
 
 CREATE TABLE vaults (
   id int NOT NULL AUTO_INCREMENT,
-  name VARCHAR(20) NOT NULL,
+  name VARCHAR(255) NOT NULL,
   description VARCHAR(255) NOT NULL,
   userId VARCHAR(255),
   INDEX userId (userId),
@@ -21,12 +21,12 @@ CREATE TABLE vaults (
 
 CREATE TABLE keeps (
   id int NOT NULL AUTO_INCREMENT,
-  name VARCHAR(20) NOT NULL,
+  name VARCHAR(255) NOT NULL,
   description VARCHAR(255) NOT NULL,
   userId VARCHAR(255),
 
   -- new
-  imageUrl VARCHAR(255) NOT NULL,
+  imageUrl TEXT NOT NULL,
   link VARCHAR(255) NOT NULL,
   public TINYINT(1) NOT NULL,
   keepCount int NOT NULL,

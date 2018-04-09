@@ -20,7 +20,7 @@ namespace keepr.Controllers
             return _repo.CreateOne(tag);
         }
 
-        [HttpGet("{ tagname }")]
+        [HttpGet("{tagname}")]
         // GET a tag by name
         public Tag GetOneByName(string tagname)
         {

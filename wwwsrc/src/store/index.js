@@ -221,7 +221,7 @@ var store = new Vuex.Store({
               api.post('tags', { Name: tag })
               .then(res => {
                 var newTag = res.data
-                console.log(' new tag', newTag)
+                console.log('new tag', newTag)
                 keepTag = { KeepId: newKeep.id, TagId: newTag.id }
                 // either way, create a new keeptags for the relationship
                 api.post('keeptags', keepTag)

@@ -1,0 +1,162 @@
+var keeps = [
+  // Belong to user "Benjamen" (email: b@b.com, pswd: password)
+  {
+    id: 1001,
+    name: 'The Wave',
+    description: 'Rippling sand dunes frozen in the Arizona rock.',
+    userId: 'df6b0c2d-b9fc-417e-ba4c-5ffb763e92ee',
+    imageUrl: 'https://assets.atlasobscura.com/media/W1siZiIsInVwbG9hZHMvcGxhY2VfaW1hZ2VzLzRhYjgwOTc5NzExZTQ4YTQwZF9EQ18yMDE0MDUxNF82OTUuanBnIl0sWyJwIiwidGh1bWIiLCJ4MzkwPiJdLFsicCIsImNvbnZlcnQiLCItcXVhbGl0eSA4MSAtYXV0by1vcmllbnQiXV0',
+    link: 'https://www.atlasobscura.com/places/wave-rock',
+    public: 1,
+    keepCount: 0,
+    shareCount: 0,
+    viewCount: 0
+  },
+  {
+    id: 1002,
+    name: 'What Makes a Tree a Tree?',
+    description: 'In Knowable Magazine, Rachel Ehrenberg writes about the tricky business of understanding what a tree is.',
+    userId: 'df6b0c2d-b9fc-417e-ba4c-5ffb763e92ee',
+    imageUrl: 'https://cdn.pixabay.com/photo/2015/03/29/01/54/tree-696839_960_720.jpg',
+    // imageUrl: 'https://kottke.org/plus/misc/images/broccoli-tree-vandal-00.jpg',
+    link: 'https://kottke.org/18/04/what-makes-a-tree-a-tree-scientists-still-arent-sure',
+    public: 0,
+    keepCount: 0,
+    shareCount: 0,
+    viewCount: 0
+  },
+  {
+    id: 1003,
+    name: 'Unknown Soviet photographer',
+    description: 'Masha Ivashintsova was a photographer based in Leningrad who, when she died in 2000, left over 30,000 photographs.',
+    userId: 'df6b0c2d-b9fc-417e-ba4c-5ffb763e92ee',
+    // imageUrl: 'https://kottke.org/plus/misc/images/masha-ivashintsova-01.jpg',
+    imageUrl: 'https://petapixel.com/assets/uploads/2018/03/7AEDD74E-D352-4A61-80B6-DA5C4C85A8A5_mw1600_q75-800x534.jpg',
+    Link: 'https://kottke.org/18/04/unknown-soviet-photographer-left-a-huge-cache-of-photos-behind-when-she-died',
+    public: 0,
+    keepCount: 0,
+    shareCount: 0,
+    viewCount: 0
+  },
+  {
+    id: 1004,
+    name: 'Earth’s Wonders Like You’ve Never Seen',
+    description: 'Here’s a series of experimental, off-angle images that capture some of the world’s most stunning vertical features.',
+    userId: 'df6b0c2d-b9fc-417e-ba4c-5ffb763e92ee',
+    imageUrl: 'https://cdn-images-1.medium.com/max/938/1*J3p50_aaRwdb9k14e1I3Mg.jpeg',
+    link: 'https://medium.com/planet-stories/earths-wonders-like-you-ve-never-seen-them-before-ac9e2f39aa56',
+    public: 1,
+    keepCount: 0,
+    shareCount: 0,
+    viewCount: 0
+  },
+  {
+    id: 1005,
+    name: 'The Missing Building Blocks of the Web',
+    description: 'At a time when millions are losing trust in the the web’s biggest sites, it’s worth revisiting the idea that the web was supposed to be made out of countless little sites.',
+    userId: 'df6b0c2d-b9fc-417e-ba4c-5ffb763e92ee',
+    imageUrl: 'https://cdn-images-1.medium.com/max/1875/1*sEBZhVAtFEzYS6RJWeC1xA.jpeg',
+    link: 'https://medium.com/@anildash/the-missing-building-blocks-of-the-web-3fa490ae5cbc',
+    public: 1,
+    keepCount: 0,
+    shareCount: 0,
+    viewCount: 0
+  },
+  {
+    id: 1006,
+    name: 'Espresso Coffee Soda',
+    description: 'A dark soda with a dark history.',
+    userId: 'df6b0c2d-b9fc-417e-ba4c-5ffb763e92ee',
+    imageUrl: 'https://assets.atlasobscura.com/media/W1siZiIsInVwbG9hZHMvdGhpbmdfaW1hZ2VzLzQ4NjdjMmU0LWY5YjgtNDJiZi05M2Q0LTAwODY0YTE0NWM1NjA2OWJkZGRjNmQyZThjOGJhYV9lc3ByZXNzbyBjb2ZmZWUgc29kYS5qcGciXSxbInAiLCJjb252ZXJ0IiwiLXF1YWxpdHkgODEgLWF1dG8tb3JpZW50Il0sWyJwIiwidGh1bWIiLCI1ODB4NTgwIyJdXQ/espresso%20coffee%20soda.jpg',
+    link: 'https://www.atlasobscura.com/foods/espresso-coffee-soda-manhattan-special',
+    public: 1,
+    keepCount: 0,
+    shareCount: 0,
+    viewCount: 0
+  },
+  // Belong to user "Randy" (email: r@r.com, pswd: password)
+  {
+    id: 14,
+    name: 'Bradbury Building',
+    description: 'The legendary building that needed ghostly approval before being built.',
+    userId: '438e427f-d750-4577-bc87-01316733104f',
+    imageUrl: 'https://assets.atlasobscura.com/media/W1siZiIsInVwbG9hZHMvcGxhY2VfaW1hZ2VzL2Q1MDA4ZWJhM2YyZjZhNzQwOV9CcmFkYnVyeS5qcGciXSxbInAiLCJ0aHVtYiIsIngzOTA-Il0sWyJwIiwiY29udmVydCIsIi1xdWFsaXR5IDgxIC1hdXRvLW9yaWVudCJdXQ/Bradbury.jpg',
+    link: 'https://www.atlasobscura.com/places/bradbury-building',
+    public: 1,
+    keepCount: 0,
+    shareCount: 0,
+    viewCount: 0
+  },
+  {
+    id: 15,
+    name: 'Rakotzbrucke Devil\'s Bridge',
+    description: 'This jaw-dropping 19th-century bridge uses its reflection to form a perfect circle.',
+    userId: '438e427f-d750-4577-bc87-01316733104f',
+    imageUrl: 'https://assets.atlasobscura.com/media/W1siZiIsInVwbG9hZHMvcGxhY2VfaW1hZ2VzLzU0MThjOTY4MTExNzRhZDhkNl8yNTI1OTY2MzIzNF82YzExNTM3YWYyX2suanBnIl0sWyJwIiwidGh1bWIiLCJ4MzkwPiJdLFsicCIsImNvbnZlcnQiLCItcXVhbGl0eSA4MSAtYXV0by1vcmllbnQiXV0/25259663234_6c11537af2_k.jpg',
+    link: 'https://www.atlasobscura.com/places/rakotzbrucke-devils-bridge',
+    public: 1,
+    keepCount: 0,
+    shareCount: 0,
+    viewCount: 0
+  },
+  {
+    id: 16,
+    name: 'Sagano Bamboo Forest',
+    description: 'The sound of swaying stalks in this stunning grove has been voted to be a governmentally recognized sound.',
+    userId: '438e427f-d750-4577-bc87-01316733104f',
+    imageUrl: 'https://assets.atlasobscura.com/media/W1siZiIsInVwbG9hZHMvcGxhY2VfaW1hZ2VzL2U2ZTI3NTAzOTM3ODU1OTAwYl80MDcwNTgxNzA5XzEyMDRmMjVlM2JfYi5qcGciXSxbInAiLCJ0aHVtYiIsIngzOTA-Il0sWyJwIiwiY29udmVydCIsIi1xdWFsaXR5IDgxIC1hdXRvLW9yaWVudCJdXQ/e6e27503937855900b_4070581709_1204f25e3b_b.jpg',
+    link: 'https://assets.atlasobscura.com/media/W1siZiIsInVwbG9hZHMvcGxhY2VfaW1hZ2VzL2U2ZTI3NTAzOTM3ODU1OTAwYl80MDcwNTgxNzA5XzEyMDRmMjVlM2JfYi5qcGciXSxbInAiLCJ0aHVtYiIsIngzOTA-Il0sWyJwIiwiY29udmVydCIsIi1xdWFsaXR5IDgxIC1hdXRvLW9yaWVudCJdXQ/e6e27503937855900b_4070581709_1204f25e3b_b.jpg',
+    public: 1,
+    keepCount: 0,
+    shareCount: 0,
+    viewCount: 0
+  },
+  {
+    id: 17,
+    name: 'Leadenhall Market',
+    description: 'This ornate Victorian marketplace was the setting for Diagon Alley and the Leaky Cauldron in the Harry Potter films.',
+    userId: '438e427f-d750-4577-bc87-01316733104f',
+    imageUrl: 'https://assets.atlasobscura.com/media/W1siZiIsInVwbG9hZHMvcGxhY2VfaW1hZ2VzL2E2ZGY5ZjM5ODc0YzljNTMzNF8xMjAwcHgtTGVhZGVuaGFsbF9NYXJrZXRfSW5fTG9uZG9uXy1fRmViXzIwMDZfcm90YXRlZC5qcGciXSxbInAiLCJ0aHVtYiIsIngzOTA-Il0sWyJwIiwiY29udmVydCIsIi1xdWFsaXR5IDgxIC1hdXRvLW9yaWVudCJdXQ/1200px-Leadenhall_Market_In_London_-_Feb_2006_rotated.jpg',
+    link: 'https://www.atlasobscura.com/places/leadenhall-market',
+    public: 1,
+    keepCount: 0,
+    shareCount: 0,
+    viewCount: 0
+  },
+  {
+    id: 18,
+    name: 'The Ruins of St. Dunstan-in-the-East',
+    description: 'One of the few remaining casualties of the London Blitz, this destroyed church has become an enchanting public garden.',
+    userId: '438e427f-d750-4577-bc87-01316733104f',
+    imageUrl: 'https://assets.atlasobscura.com/media/W1siZiIsInVwbG9hZHMvcGxhY2VfaW1hZ2VzL2JmYzkwOGVjNjVkMjEyN2M1Ml9JTUdfMDU2NS5KUEciXSxbInAiLCJ0aHVtYiIsIngzOTA-Il0sWyJwIiwiY29udmVydCIsIi1xdWFsaXR5IDgxIC1hdXRvLW9yaWVudCJdXQ',
+    link: 'https://www.atlasobscura.com/places/the-ruins-of-st-dunstan-in-the-east',
+    public: 0,
+    keepCount: 0,
+    shareCount: 0,
+    viewCount: 0
+  },
+  {
+    id: 19,
+    name: 'Horseshoe Bend',
+    description: 'Dramatic river bend surrounds a natural red-rocked pedestal.',
+    userId: '438e427f-d750-4577-bc87-01316733104f',
+    imageUrl: 'https://assets.atlasobscura.com/media/W1siZiIsInVwbG9hZHMvcGxhY2VfaW1hZ2VzLzZlMmNjNDhmNWYzYTk2YmE2ZmY1M2ViNzlkMGM1OWRmN2M3MmRiYmYuanBnIl0sWyJwIiwidGh1bWIiLCJ4MzkwPiJdLFsicCIsImNvbnZlcnQiLCItcXVhbGl0eSA4MSAtYXV0by1vcmllbnQiXV0/6e2cc48f5f3a96ba6ff53eb79d0c59df7c72dbbf.jpg',
+    link: 'https://www.atlasobscura.com/places/horseshoe-bend',
+    public: 0,
+    keepCount: 0,
+    shareCount: 0,
+    viewCount: 0
+  },
+  {
+    id: 1013,
+    name: 'Museum of Neon Art',
+    description: 'A one-of-a-kind collection of a unique medium.',
+    userId: '438e427f-d750-4577-bc87-01316733104f',
+    imageUrl: 'https://assets.atlasobscura.com/media/W1siZiIsInVwbG9hZHMvcGxhY2VfaW1hZ2VzL25lb24xLmpwZyJdLFsicCIsInRodW1iIiwieDM5MD4iXSxbInAiLCJjb252ZXJ0IiwiLXF1YWxpdHkgODEgLWF1dG8tb3JpZW50Il1d/neon1.jpg',
+    link: 'https://www.atlasobscura.com/places/museum-neon-art-g',
+    public: 0,
+    keepCount: 0,
+    shareCount: 0,
+    viewCount: 0
+  }
+]

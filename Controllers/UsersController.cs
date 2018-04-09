@@ -15,7 +15,7 @@ namespace keepr.Controllers
             _repo = repo;
         }
 
-        [HttpGet("{ id }/keeps")]
+        [HttpGet("{id}/keeps")]
         // Get keeps by User ID
         public List<Keep> GetKeepsByUserId(string id)
         {
