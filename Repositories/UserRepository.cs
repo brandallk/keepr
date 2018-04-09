@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using Dapper;
 using keepr.Models;
 using keepr.Models.AuxiliaryModels;
@@ -119,5 +121,14 @@ namespace keepr.Repositories
       }
       return "Unable to change password";
     }
+
+    public List<Keep> GetKeepsByUserId(string id)
+    {
+      return _db.Query<Keep>(@"
+      SELECT * FROM keeps
+      WHERE id=@Id
+      ", new { Id = id }).ToList();
+    }
+
   }
 }

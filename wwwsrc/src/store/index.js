@@ -187,6 +187,9 @@ var store = new Vuex.Store({
         message: error.message
       }
     },
+    setMyKeeps(state, keeps) {
+      state.myKeeps = keeps
+    },
     addToMyKeeps(state, keep) {
       state.myKeeps.push(keep)
     }
@@ -202,7 +205,6 @@ var store = new Vuex.Store({
       }
       api.post('keeps', formData)
       .then(res => {
-        console.log('post new keep res', res)
         var newKeep = res.data
         console.log('new keep', newKeep)
         commit('addToMyKeeps', newKeep)
@@ -216,10 +218,10 @@ var store = new Vuex.Store({
             console.log('existingTag', existingTag)
             // if it doesn't, create a new tag
             if (!existingTag) {
-              console.log('tag', tag)
               api.post('tags', { Name: tag })
               .then(res => {
                 var newTag = res.data
+                console.log(' new tag', newTag)
                 keepTag = { KeepId: newKeep.id, TagId: newTag.id }
                 // either way, create a new keeptags for the relationship
                 api.post('keeptags', keepTag)
@@ -244,6 +246,18 @@ var store = new Vuex.Store({
           })
           .catch(err => { console.log(err) })
         })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+
+    getMyKeeps({commit, dispatch}, userId) {
+      api.get(`users/${userId}/keeps`)
+      .then(res => {
+        var myKeeps = res.data
+        console.log('MyKeeps from DB:', myKeeps)
+        commit('setMyKeeps', myKeeps)
       })
       .catch(err => {
         console.log(err)

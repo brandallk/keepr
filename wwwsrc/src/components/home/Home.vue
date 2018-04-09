@@ -26,6 +26,9 @@
       'keeps-wall': KeepsWall,
       'create-keep-form': CreateKeepForm
     },
+    mounted() {
+      this.$store.dispatch('getMyKeeps', this.$store.state.user.id)
+    },
     props: [],
     data() {
       return {
