@@ -35,9 +35,17 @@ export default {
       .then(res => {
         var user = res.data
         console.log('User logged in:', user.username)
-        commit('setUser', user)
-        commit('setAuthError', {error: false, message: ''})
-        router.push({name: 'Home'})
+        if (user.username) {
+          commit('setUser', user)
+          commit('setAuthError', {error: false, message: ''})
+          router.push({name: 'Home'})
+        }
+        else {
+          commit('setAuthError', {
+            error: true,
+            message: 'Login attempt failed: Invalid email or password'
+          })
+        }
       })
       .catch(err => {
         console.log(err)
@@ -60,10 +68,12 @@ export default {
         }
         else {
           console.log('Could not authenticate user')
+          router.push({name: 'Welcome'})
         }
       })
       .catch(() => {
         console.log('Session authentication failed')
+        router.push({name: 'Welcome'})
       })
     },
 

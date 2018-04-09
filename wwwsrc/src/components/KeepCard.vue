@@ -2,15 +2,15 @@
   <div class="keep-card" @mouseover="activateOverlay" @mouseout="deactivateOverlay">
     
     <div class="card">
-      <img class="card-img-top" :src="keep.ImageUrl" :alt="keep.Name">
+      <img class="card-img-top" :src="keep.imageUrl" :alt="keep.name">
       <div class="card-body">
-        <h5 class="card-title">{{ keep.Name }}</h5>
-        <p class="card-text">{{ keep.Description }}</p>
+        <h5 class="card-title">{{ keep.name }}</h5>
+        <p class="card-text">{{ keep.description }}</p>
       </div>
     </div>
 
     <div class="overlay" v-if="showOverlay">
-      <a :href="keep.Link" @click="viewKeep">
+      <a :href="keep.link" @click="viewKeep">
         <div class="overlay-icon keep-icon row">
           <i class="fas fa-eye fa-2x col-12"></i>
           <span class="col-12 text-center">view</span>
@@ -52,15 +52,15 @@
         this.showOverlay = false
       },
       viewKeep() {
-        console.log(`View keep ${this.keep.Name}`)
+        console.log(`View keep ${this.keep.name}`)
         // Increment keep's viewCount
       },
       addKeep() {
-        console.log(`Add keep ${this.keep.Name}`)
+        console.log(`Add keep ${this.keep.name}`)
         // Increment keep's keepCount
       },
       shareKeep() {
-        console.log(`Share keep ${this.keep.Name}`)
+        console.log(`Share keep ${this.keep.name}`)
         // Increment keep's shareCount
       }
     }

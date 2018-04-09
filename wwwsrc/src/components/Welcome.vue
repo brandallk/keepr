@@ -2,16 +2,8 @@
   <div class="welcome">
 
     <navbar></navbar>
-    
-    <div class="main p-4">
-      Welcome
-    </div>
 
-    <div class="keeps-wrapper container-fluid mx-0 p-4">
-        <div class="card-columns">
-            <keep-card class="p-2 card" v-for="keep in publicKeeps" :keep="keep" :key="keep.Id"></keep-card>
-        </div>
-    </div>
+    <keeps-wall :keeps="publicKeeps"></keeps-wall>
   
   </div>
 
@@ -19,12 +11,12 @@
 
 <script>
   import Navbar from './Navbar'
-  import KeepCard from './KeepCard'
+  import KeepsWall from './KeepsWall'
   export default {
     name: 'Welcome',
     components: {
       'navbar': Navbar,
-      'keep-card': KeepCard
+      'keeps-wall': KeepsWall
     },
     props: [],
     data() {

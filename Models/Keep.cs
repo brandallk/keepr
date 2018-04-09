@@ -11,8 +11,8 @@ namespace keepr.Models
         public string ImageUrl { get; set; }
         public string Link { get; set; }
         public int Public { get; set; } = 0; // Simulate a bool for MySQL TINYINT(1)
-        public int KeepCount { get; set; }
-        public int ShareCount { get; set; }
-        public int ViewCount { get; set; }
+        public int KeepCount { get; set; } = 0;
+        public int ShareCount { get; set; } = 0;
+        public int ViewCount { get; set; } = 0;
     }
 }
