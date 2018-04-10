@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using Dapper;
 using keepr.Models;
 
@@ -34,6 +36,14 @@ namespace keepr.Repositories
 
             vaultKeep.Id = id;
             return vaultKeep;
+        }
+
+        public List<Vault> GetByUserId(string id)
+        {
+            return _db.Query<Vault>(@"
+            SELECT * FROM vaults
+            WHERE userId=@Id
+            ", new { Id = id }).ToList();
         }
     }
 }

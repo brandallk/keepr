@@ -251,6 +251,12 @@ var store = new Vuex.Store({
         message: error.message
       }
     },
+    setMyVaults(state, vaults) {
+      state.myVaults = vaults
+    },
+    addToMyVaults(state, vault) {
+      state.myVaults.push(vault)
+    },
     setMyKeeps(state, keeps) {
       state.myKeeps = keeps
     },
@@ -259,9 +265,6 @@ var store = new Vuex.Store({
     },
     setPublicKeeps(state, keeps) {
       state.publicKeeps = keeps
-    },
-    addToMyVaults(state, vault) {
-      state.myVaults.push(vault)
     }
   },
 
@@ -273,6 +276,18 @@ var store = new Vuex.Store({
         var newVault = res.data
         console.log('new vault:', newVault)
         commit('addToMyVaults', newVault)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+
+    getMyVaults({commit, dispatch}, userId) {
+      api.get(`users/${userId}/vaults`)
+      .then(res => {
+        var myVaults = res.data
+        console.log('MyVaults from DB:', myVaults)
+        commit('setMyVaults', myVaults)
       })
       .catch(err => {
         console.log(err)
@@ -363,6 +378,9 @@ var store = new Vuex.Store({
       .then(res => {
         var newVaultKeep = res.data
         console.log('New vault-keep relationship:', newVaultKeep)
+      })
+      .catch(err => {
+        console.log(err)
       })
     }
 
