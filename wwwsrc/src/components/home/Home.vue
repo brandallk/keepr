@@ -11,6 +11,8 @@
 
       <vaults-list v-if="homeBody == 'my-vaults'"></vaults-list>
 
+      <create-vault-form v-if="homeBody == 'new-vault'"></create-vault-form>
+
     </div>
 
   </div>
@@ -22,13 +24,15 @@
   import KeepsWall from '../KeepsWall'
   import CreateKeepForm from './CreateKeepForm'
   import VaultsList from './VaultsList'
+  import CreateVaultForm from './CreateVaultForm'
   export default {
     name: 'Home',
     components: {
       'navbar': Navbar,
       'keeps-wall': KeepsWall,
       'create-keep-form': CreateKeepForm,
-      'vaults-list': VaultsList
+      'vaults-list': VaultsList,
+      'create-vault-form': CreateVaultForm
     },
     mounted() {
       waitForSessionUser(this) // Wait briefly to make sure the session user has a defined value...

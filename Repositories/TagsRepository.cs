@@ -18,10 +18,8 @@ namespace keepr.Repositories
             SELECT id FROM tags
             WHERE name=@Name
             ", tag);
-            // ", new { Name = tagname });
 
             tag.Id = id;
-            // Tag tag = new Tag() { Id = id, Name = tagname };
             return tag;
         }
 

@@ -177,25 +177,25 @@ var store = new Vuex.Store({
     ],
     myVaults: [
       {
-        id: 1,
+        id: 1001,
         name: "Buildings",
         description: "Buildings found on Atlas Obscura",
         userId: "438e427f-d750-4577-bc87-01316733104f"
       },
       {
-        id: 2,
+        id: 1002,
         name: "Nature",
         description: "Natural locations found on Atlas Obscura",
         userId: "438e427f-d750-4577-bc87-01316733104f"
       },
       {
-        id: 3,
+        id: 1003,
         name: "Photography",
         description: "Examples involving photography",
         userId: "df6b0c2d-b9fc-417e-ba4c-5ffb763e92ee"
       },
       {
-        id: 4,
+        id: 1004,
         name: "Stone",
         description: "Examples involving stone",
         userId: "df6b0c2d-b9fc-417e-ba4c-5ffb763e92ee"
@@ -259,10 +259,25 @@ var store = new Vuex.Store({
     },
     setPublicKeeps(state, keeps) {
       state.publicKeeps = keeps
+    },
+    addToMyVaults(state, vault) {
+      state.myVaults.push(vault)
     }
   },
 
   actions: {
+
+    createVault({commit, dispatch}, formData) {
+      api.post('vaults', formData)
+      .then(res => {
+        var newVault = res.data
+        console.log('new vault:', newVault)
+        commit('addToMyVaults', newVault)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
 
     createKeep({commit, dispatch}, formData) {
       var tags = []
