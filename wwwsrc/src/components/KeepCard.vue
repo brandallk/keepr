@@ -16,9 +16,9 @@
           <span class="col-12 text-center">view</span>
         </div>
       </a>
-      <div class="overlay-icon keep-icon row" @click="addKeep">
+      <div class="overlay-icon keep-icon row" v-if="sessionUser" @click="addKeep">
         <i class="fas fa-check-circle fa-2x col-12"></i>
-        <span class="col-12 text-center">keep</span>
+        <span class="col-12 text-center">save to vault</span>
       </div>
       <div class="overlay-icon keep-icon row" @click="shareKeep">
         <i class="fas fa-share fa-2x col-12"></i>
@@ -42,7 +42,9 @@
       }
     },
     computed: {
-
+      sessionUser() {
+        return this.$store.state.user.username
+      }
     },
     methods: {
       activateOverlay() {
