@@ -34,5 +34,13 @@ namespace keepr.Repositories
             WHERE public=@Public
             ", new { Public = isPublic }).ToList();
         }
+
+        public List<Keep> GetByUserId(string id)
+        {
+        return _db.Query<Keep>(@"
+        SELECT * FROM keeps
+        WHERE userId=@Id
+        ", new { Id = id }).ToList();
+        }
     }
 }

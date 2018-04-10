@@ -122,13 +122,5 @@ namespace keepr.Repositories
       return "Unable to change password";
     }
 
-    public List<Keep> GetKeepsByUserId(string id)
-    {
-      return _db.Query<Keep>(@"
-      SELECT * FROM keeps
-      WHERE userId=@Id
-      ", new { Id = id }).ToList();
-    }
-
   }
 }

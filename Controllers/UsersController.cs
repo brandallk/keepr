@@ -9,11 +9,13 @@ namespace keepr.Controllers
     public class UsersController
     {
         private readonly UserRepository _repo;
+        private readonly KeepsRepository _keepsRepo;
         private readonly VaultsRepository _vaultsRepo;
 
-        public UsersController(UserRepository repo, VaultsRepository vaultsRepo)
+        public UsersController(UserRepository repo,  KeepsRepository keepsRepo, VaultsRepository vaultsRepo)
         {
             _repo = repo;
+            _keepsRepo = keepsRepo;
             _vaultsRepo = vaultsRepo;
         }
 
@@ -21,7 +23,7 @@ namespace keepr.Controllers
         // Get keeps by User ID
         public List<Keep> GetKeepsByUserId(string id)
         {
-            return _repo.GetKeepsByUserId(id);
+            return _keepsRepo.GetByUserId(id);
         }
 
         [HttpGet("{id}/vaults")]
