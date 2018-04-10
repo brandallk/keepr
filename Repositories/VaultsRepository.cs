@@ -22,5 +22,18 @@ namespace keepr.Repositories
             vault.Id = id;
             return vault;
         }
+
+        public VaultKeep AssociateVaultAndKeep(VaultKeep vaultKeep)
+        {
+            int id = _db.ExecuteScalar<int>(@"
+            INSERT INTO vaultkeeps (vaultId, keepId, userId)
+            VALUES (@VaultId, @KeepId, @UserId);
+            SELECT id FROM vaultkeeps
+            WHERE vaultId=@VaultId AND keepId=@KeepId AND userId=@UserId
+            ", vaultKeep);
+
+            vaultKeep.Id = id;
+            return vaultKeep;
+        }
     }
 }

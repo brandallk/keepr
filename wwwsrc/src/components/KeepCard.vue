@@ -85,8 +85,13 @@
         this.showVaultDropdown = this.showVaultDropdown ? false : true
       },
       saveKeepToVault(vault) {
-        console.log(`Save '${this.keep.name}' keep to vault '${vault.name}'`)
-        // save keep to vault via dispatch, vaultkeeps model, controller, repository
+        var Ids = {
+          VaultId: vault.id,
+          KeepId: this.keep.id,
+          UserId: this.$store.state.user.id
+        }
+        console.log(`Save '${Ids.KeepId}' keep to vault '${Ids.VaultId}' for user '${Ids.UserId}'`)
+        this.$store.dispatch('saveKeepToVault', Ids)
       }
     }
   }

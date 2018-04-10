@@ -59,6 +59,7 @@ namespace keepr
             services.AddTransient<TagsRepository>();
             services.AddTransient<KeeptagsRepository>();
             services.AddTransient<VaultsRepository>();
+            services.AddTransient<VaultKeepsRepository>();
         }
 
         private IDbConnection CreateDbContext()

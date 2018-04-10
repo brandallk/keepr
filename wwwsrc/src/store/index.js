@@ -356,6 +356,14 @@ var store = new Vuex.Store({
       .catch(err => {
         console.log(err)
       })
+    },
+
+    saveKeepToVault({commit, dispatch}, Ids) {
+      api.post('vaults/keeps', Ids)
+      .then(res => {
+        var newVaultKeep = res.data
+        console.log('New vault-keep relationship:', newVaultKeep)
+      })
     }
 
   }

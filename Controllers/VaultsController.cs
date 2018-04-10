@@ -19,5 +19,11 @@ namespace keepr.Controllers
         {
             return _repo.CreateOne(vault);
         }
+
+        [HttpPost("keeps")]
+        public VaultKeep AssociateVaultAndKeep([FromBody] VaultKeep vaultKeep)
+        {
+            return _repo.AssociateVaultAndKeep(vaultKeep);
+        }
     }
 }
