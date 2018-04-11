@@ -35,6 +35,18 @@
 
     </div>
 
+    <div class="stats row px-2 text-muted">
+      <div class="col text-center">
+        <span><small>views: {{keep.viewCount}}</small></span>
+      </div>
+      <div class="col text-center">
+        <span><small>keeps: {{keep.keepCount}}</small></span>
+      </div>
+      <div class="col text-center">
+        <span><small>shares: {{keep.shareCount}}</small></span>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -73,13 +85,15 @@
         console.log(`View keep ${this.keep.name}`)
         // Increment keep's viewCount
       },
-      // addKeep() {
-      //   console.log(`Add keep ${this.keep.name}`)
-      //   // Increment keep's keepCount
-      // },
       shareKeep() {
-        console.log(`Share keep ${this.keep.name}`)
         // Increment keep's shareCount
+        this.keep.shareCount++
+        this.$store.dispatch('updateKeep', this.keep)
+        // This method will have to change...
+        // 1. Show the share-options dropdown
+        // 2. The dropdown will have a separate @change method (and @click.stop="noop")
+        //   a. The @change will do the incrementing of the keep's shareCount
+        //   b. It will also implement the 3rd-party sharing via Facebook or Twitter
       },
       toggleVaultDropdown() {
         this.showVaultDropdown = this.showVaultDropdown ? false : true
@@ -90,8 +104,8 @@
           KeepId: this.keep.id,
           UserId: this.$store.state.user.id
         }
-        console.log(`Save '${Ids.KeepId}' keep to vault '${Ids.VaultId}' for user '${Ids.UserId}'`)
         this.$store.dispatch('saveKeepToVault', Ids)
+        // Increment keep's keepCount
       }
     }
   }
@@ -114,11 +128,17 @@
     align-items: center;
   }
   .overlay-icon {
-    color: white;
+    color: rgb(204, 230, 255);
   }
   .overlay-icon:hover {
     cursor: pointer;
     color: rgba(255, 255, 255, 0.75);
+  }
+  .overlay-icon span {
+    margin-top: 0.35rem;
+    padding-top: 0.25rem; 
+    padding-bottom: 0.25rem; 
+    background-color: dodgerblue;
   }
   a:hover {
     text-decoration: none;

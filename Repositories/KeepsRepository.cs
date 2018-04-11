@@ -51,5 +51,22 @@ namespace keepr.Repositories
             WHERE vaultId=@Id
             ", new { Id = id}).ToList();
         }
+
+        public Keep FindOneAndUpdate(int id, Keep keep)
+        {
+            return _db.QueryFirstOrDefault<Keep>($@"
+            UPDATE keeps SET
+                Name=@Name,
+                Description=@Description,
+                ImageUrl=@ImageUrl,
+                Link=@Link,
+                Public=@Public,
+                KeepCount=@KeepCount,
+                ShareCount=@ShareCount,
+                ViewCount=@ViewCount
+            WHERE Id = {id};
+            SELECT * FROM keeps WHERE Id = {id}
+            ", keep);
+        }
     }
 }

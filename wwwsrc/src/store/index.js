@@ -363,7 +363,19 @@ var store = new Vuex.Store({
 
     clearKeepsInActiveVault({commit, dispatch}) {
       commit('setKeepsInActiveVault', [])
+    },
+  
+    updateKeep({commit, dispatch}, keep) {
+      api.put(`keeps/${keep.id}`, keep)
+      .then(res => {
+        var updatedKeep = res.data
+        console.log('Updated keep:', updatedKeep)
+      })
+      .catch(err => {
+        console.log(err)
+      })
     }
+  
   }
 
 })

@@ -30,5 +30,15 @@ namespace keepr.Controllers
         {
             return _repo.GetPublicKeeps();
         }
+
+        [HttpPut("{id}")]
+        public Keep Update(int id, [FromBody] Keep keep)
+        {
+            if (ModelState.IsValid)
+            {
+                return _repo.FindOneAndUpdate(id, keep);
+            }
+            return null;
+        }
     }
 }
