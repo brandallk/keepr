@@ -83,6 +83,9 @@ export default {
         console.log(res.data)
         commit('setUser', {})
         commit('setAuthError', {error: false, message: ''})
+        commit('setMyVaults', [])
+        commit('setMyKeeps', [])
+        commit('setKeepsInActiveVault', [])
         router.push({name: 'Welcome'})
       })
       .catch(err => {
