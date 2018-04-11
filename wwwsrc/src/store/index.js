@@ -248,6 +248,19 @@ var store = new Vuex.Store({
       })
     },
 
+    deleteVault({commit, dispatch}, vault) {
+      api.delete(`vaults/${vault.id}`)
+      .then(res => {
+        var result = res
+        console.log(result)
+        dispatch('getKeepsForVault', vault.id)
+        dispatch('getMyVaults', vault.userId)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+
     getMyVaults({commit, dispatch}, userId) {
       api.get(`users/${userId}/vaults`)
       .then(res => {

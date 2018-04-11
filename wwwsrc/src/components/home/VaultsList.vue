@@ -17,6 +17,11 @@
       <p>{{selectedVault.description}}</p>
     </div>
 
+    <div class="vault-options text-center" v-if="selectedVault.name !== 'choose'">
+      <button class="btn btn-default btn-sm">edit this vault</button>
+      <button class="btn btn-danger btn-sm ml-2" @click="deleteVault">delete this vault</button>
+    </div>
+
     <keeps-wall :keeps="keepsInActiveVault"></keeps-wall>
 
   </div>
@@ -47,6 +52,10 @@
     methods: {
       vaultSelected() {
         this.$store.dispatch('getKeepsForVault', this.selectedVault.id)
+      },
+      deleteVault() {
+        this.$store.dispatch('deleteVault', this.selectedVault)
+        this.selectedVault = { name: 'choose' }
       }
     }
   }

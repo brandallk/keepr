@@ -34,5 +34,11 @@ namespace keepr.Controllers
         {
             return _keepsRepo.GetByVaultId(id);
         }
+
+        [HttpDelete("{id}")]
+        public string DeleteVaultById(int id)
+        {
+            return _repo.DeleteOne(id);
+        }
     }
 }

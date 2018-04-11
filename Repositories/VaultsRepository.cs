@@ -45,5 +45,22 @@ namespace keepr.Repositories
             WHERE userId=@Id
             ", new { Id = id }).ToList();
         }
+
+        public string DeleteOne(int id)
+        {
+            var rowsAffected = _db.Execute(@"
+            DELETE FROM vaults
+            WHERE id=@Id
+            ", new { Id = id });
+
+            if (rowsAffected > 0)
+            {
+                return "Successfully deleted vault";
+            }
+            else
+            {
+                return "Failed to delete vault";
+            }
+        }
     }
 }

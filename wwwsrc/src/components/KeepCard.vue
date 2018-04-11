@@ -118,7 +118,7 @@
   }
   .overlay {
     border-radius: 4px;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.5);
     position: absolute;
     width: 100%;
     height: 100%;
