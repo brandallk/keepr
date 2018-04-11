@@ -69,6 +69,7 @@
     methods: {
       changeHomeBody(value) {
         this.homeBody = value
+        this.$store.dispatch('clearKeepsInActiveVault')
       }
     }
   }

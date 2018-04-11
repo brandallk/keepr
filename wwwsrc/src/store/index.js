@@ -231,6 +231,9 @@ var store = new Vuex.Store({
     },
     setKeepsInActiveVault(state, keeps) {
       state.keepsInActiveVault = keeps
+    },
+    clearKeepsInActiveVault(state, keeps) {
+      state.keepsInActiveVault = []
     }
   },
 
@@ -359,8 +362,11 @@ var store = new Vuex.Store({
       .catch(err => {
         console.log(err)
       })
-    }
+    },
 
+    clearKeepsInActiveVault({commit, dispatch}) {
+      commit('clearKeepsInActiveVault')
+    }
   }
 
 })
