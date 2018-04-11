@@ -5,6 +5,15 @@
     
     <div class="home-body">
 
+      <div class="settings-toggle px-5 py-3 d-flex" v-if="homeBody == 'my-keeps'" :keeps="myKeeps">
+        <span class="h5" v-if="showPrivateKeeps">My private keeps:</span>
+        <span class="h5" v-if="!showPrivateKeeps">My public keeps:</span>
+        <div class="toggles d-inline-block ml-auto">
+          <button class="set-public btn btn-primary" v-if="showPrivateKeeps" @click="showPrivateKeeps = false">see public keeps</button>
+          <button class="set-private btn btn-primary" v-if="!showPrivateKeeps" @click="showPrivateKeeps = true">see private keeps</button>
+        </div>
+      </div>
+
       <keeps-wall v-if="homeBody == 'my-keeps'" :keeps="myKeeps"></keeps-wall>
 
       <create-keep-form v-if="homeBody == 'new-keep'"></create-keep-form>
@@ -58,12 +67,23 @@
     props: [],
     data() {
       return {
-        homeBody: 'my-keeps'
+        homeBody: 'my-keeps',
+        showPrivateKeeps: false
       }
     },
     computed: {
       myKeeps() {
-        return this.$store.state.myKeeps
+        return this.showPrivateKeeps ? this.myPrivateKeeps : this.myPublicKeeps
+      },
+      myPrivateKeeps() {
+        return this.$store.state.myKeeps.filter(keep => {
+          return keep.public === 1
+        })
+      },
+      myPublicKeeps() {
+        return this.$store.state.myKeeps.filter(keep => {
+          return keep.public === 0
+        })
       }
     },
     methods: {
