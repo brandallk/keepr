@@ -24,7 +24,7 @@
 
     <edit-vault-form v-if="showVaultEditForm" :vault="selectedVault" v-on:closeEditVaultForm="showVaultEditForm = false"></edit-vault-form>
 
-    <keeps-wall :keeps="keepsInActiveVault"></keeps-wall>
+    <keeps-wall :keeps="keepsInActiveVault" :allowDeletesFromVault="true"></keeps-wall>
 
   </div>
 
@@ -56,7 +56,7 @@
     },
     methods: {
       vaultSelected() {
-        this.$store.dispatch('getKeepsForVault', this.selectedVault.id)
+        this.$store.dispatch('getKeepsForVault', this.selectedVault)
       },
       loadVaultEditForm() {
         this.selectedVault = this.selectedVault

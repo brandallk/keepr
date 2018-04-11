@@ -11,6 +11,12 @@
 
     <div class="overlay" v-if="showOverlay">
 
+      <div class="delete-icon" v-if="allowDeletesFromVault">
+        <a href="#" class="text-danger" @click.prevent="removeKeepFromVault" title="Remove from vault">
+          <i class="fas fa-times-circle fa-2x"></i>
+        </a>
+      </div>
+
       <a :href="keep.link" @click="viewKeep">
         <div class="overlay-icon view-icon row">
           <i class="fas fa-eye fa-2x col-12"></i>
@@ -58,7 +64,8 @@
       'vault-dropdown': VaultDropdown
     },
     props: [
-      'keep'
+      'keep',
+      'allowDeletesFromVault'
     ],
     data() {
       return {
@@ -107,6 +114,13 @@
         }
         this.keep.keepCount++
         this.$store.dispatch('saveKeepToVault', Ids)
+      },
+      removeKeepFromVault() {
+        var data = {
+          vault: this.$store.state.activeVault,
+          keep: this.keep
+        }
+        this.$store.dispatch('removeKeepFromVault', data)
       }
     }
   }
@@ -153,5 +167,11 @@
     position: absolute;
     left: 10%;
     bottom: -110%;
+  }
+
+  .delete-icon {
+    position: absolute;
+    top: 5%;
+    right: 5%;
   }
 </style>

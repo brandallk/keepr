@@ -201,6 +201,7 @@ var store = new Vuex.Store({
         // userId: "df6b0c2d-b9fc-417e-ba4c-5ffb763e92ee"
       // }
     ],
+    activeVault: {},
     keepsInActiveVault: []
   },
 
@@ -228,6 +229,9 @@ var store = new Vuex.Store({
     },
     setPublicKeeps(state, keeps) {
       state.publicKeeps = keeps
+    },
+    setActiveVault(state, vault) {
+      state.activeVault = vault
     },
     setKeepsInActiveVault(state, keeps) {
       state.keepsInActiveVault = keeps
@@ -363,10 +367,11 @@ var store = new Vuex.Store({
       })
     },
 
-    getKeepsForVault({commit, dispatch}, vaultId) {
-      api.get(`vaults/${vaultId}/keeps`)
+    getKeepsForVault({commit, dispatch}, vault) {
+      api.get(`vaults/${vault.id}/keeps`)
       .then(res => {
         var keeps = res.data
+        commit('setActiveVault', vault)
         commit('setKeepsInActiveVault', keeps)
       })
       .catch(err => {
@@ -385,6 +390,20 @@ var store = new Vuex.Store({
       })
     },
 
+    removeKeepFromVault({commit, dispatch}, data) {
+      var vaultId = data.vault.id
+      var keepId = data.keep.id
+      api.delete(`vaults/${vaultId}/keeps/${keepId}`)
+      .then(res => {
+        var result = res
+        console.log(result)
+        dispatch('getKeepsForVault', data.vault)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+    
     clearKeepsInActiveVault({commit, dispatch}) {
       commit('setKeepsInActiveVault', [])
     },

@@ -29,6 +29,22 @@ namespace keepr.Controllers
             return _repo.AssociateVaultAndKeep(vaultKeep);
         }
 
+        [HttpDelete("{vaultId}/keeps/{keepId}")]
+        public string DissociateVaultAndKeep(int vaultId, int keepId)
+        {
+            var user = HttpContext.User;
+            if (user.Identity.Name != null)
+            {
+                var sessionId = user.Identity.Name;
+                var vaultKeep = new VaultKeep();
+                vaultKeep.VaultId = vaultId;
+                vaultKeep.KeepId = keepId;
+                vaultKeep.UserId = sessionId;
+                return _repo.DissociateVaultAndKeep(vaultKeep);
+            }
+            return null;
+        }
+
         [HttpGet("{id}/keeps")]
         public List<Keep> GetKeepsByVaultId(string id)
         {

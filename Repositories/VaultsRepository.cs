@@ -38,6 +38,23 @@ namespace keepr.Repositories
             return vaultKeep;
         }
 
+        public string DissociateVaultAndKeep(VaultKeep vaultKeep)
+        {
+            var rowsAffected = _db.Execute(@"
+            DELETE FROM vaultkeeps
+            WHERE vaultId=@VaultId AND keepId=@KeepId AND userId=@UserId
+            ", vaultKeep);
+
+            if (rowsAffected > 0)
+            {
+                return "Successfully dissociated keep from vault";
+            }
+            else
+            {
+                return "Failed to dissociate keep from vault";
+            }
+        }
+
         public List<Vault> GetByUserId(string id)
         {
             return _db.Query<Vault>(@"
