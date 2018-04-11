@@ -42,8 +42,7 @@
     },
     methods: {
       vaultSelected() {
-        console.log('vault selected')
-        // Use this.selectedVault to dispatch an action to update this.$store.state.keepsInActiveVault
+        this.$store.dispatch('getKeepsForVault', this.selectedVault.id)
       }
     }
   }

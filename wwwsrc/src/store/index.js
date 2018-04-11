@@ -201,44 +201,7 @@ var store = new Vuex.Store({
         userId: "df6b0c2d-b9fc-417e-ba4c-5ffb763e92ee"
       }
     ],
-    keepsInActiveVault: [
-      {
-        id: 1010,
-        name: 'The Ruins of St. Dunstan-in-the-East',
-        description: 'One of the few remaining casualties of the London Blitz, this destroyed church has become an enchanting public garden.',
-        userId: '80f175b5-20f6-421f-a45e-e2360084f929',
-        imageUrl: 'https://assets.atlasobscura.com/media/W1siZiIsInVwbG9hZHMvcGxhY2VfaW1hZ2VzL2JmYzkwOGVjNjVkMjEyN2M1Ml9JTUdfMDU2NS5KUEciXSxbInAiLCJ0aHVtYiIsIngzOTA-Il0sWyJwIiwiY29udmVydCIsIi1xdWFsaXR5IDgxIC1hdXRvLW9yaWVudCJdXQ',
-        link: 'https://www.atlasobscura.com/places/the-ruins-of-st-dunstan-in-the-east',
-        public: 0,
-        keepCount: 0,
-        shareCount: 0,
-        viewCount: 0
-      },
-      {
-        id: 1011,
-        name: 'Horseshoe Bend',
-        description: 'Dramatic river bend surrounds a natural red-rocked pedestal.',
-        userId: '80f175b5-20f6-421f-a45e-e2360084f929',
-        imageUrl: 'https://assets.atlasobscura.com/media/W1siZiIsInVwbG9hZHMvcGxhY2VfaW1hZ2VzLzZlMmNjNDhmNWYzYTk2YmE2ZmY1M2ViNzlkMGM1OWRmN2M3MmRiYmYuanBnIl0sWyJwIiwidGh1bWIiLCJ4MzkwPiJdLFsicCIsImNvbnZlcnQiLCItcXVhbGl0eSA4MSAtYXV0by1vcmllbnQiXV0/6e2cc48f5f3a96ba6ff53eb79d0c59df7c72dbbf.jpg',
-        link: 'https://www.atlasobscura.com/places/horseshoe-bend',
-        public: 0,
-        keepCount: 0,
-        shareCount: 0,
-        viewCount: 0
-      },
-      {
-        id: 1012,
-        name: 'Museum of Neon Art',
-        description: 'A one-of-a-kind collection of a unique medium.',
-        userId: '80f175b5-20f6-421f-a45e-e2360084f929',
-        imageUrl: 'https://assets.atlasobscura.com/media/W1siZiIsInVwbG9hZHMvcGxhY2VfaW1hZ2VzL25lb24xLmpwZyJdLFsicCIsInRodW1iIiwieDM5MD4iXSxbInAiLCJjb252ZXJ0IiwiLXF1YWxpdHkgODEgLWF1dG8tb3JpZW50Il1d/neon1.jpg',
-        link: 'https://www.atlasobscura.com/places/museum-neon-art-g',
-        public: 0,
-        keepCount: 0,
-        shareCount: 0,
-        viewCount: 0
-      }
-    ]
+    keepsInActiveVault: []
   },
 
   mutations: {
@@ -265,6 +228,9 @@ var store = new Vuex.Store({
     },
     setPublicKeeps(state, keeps) {
       state.publicKeeps = keeps
+    },
+    setKeepsInActiveVault(state, keeps) {
+      state.keepsInActiveVault = keeps
     }
   },
 
@@ -367,6 +333,17 @@ var store = new Vuex.Store({
         var publicKeeps = res.data
         console.log('PublicKeeps from DB:', publicKeeps)
         commit('setPublicKeeps', publicKeeps)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+
+    getKeepsForVault({commit, dispatch}, vaultId) {
+      api.get(`vaults/${vaultId}/keeps`)
+      .then(res => {
+        var keeps = res.data
+        commit('setKeepsInActiveVault', keeps)
       })
       .catch(err => {
         console.log(err)

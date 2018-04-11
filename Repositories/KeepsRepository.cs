@@ -37,10 +37,19 @@ namespace keepr.Repositories
 
         public List<Keep> GetByUserId(string id)
         {
-        return _db.Query<Keep>(@"
-        SELECT * FROM keeps
-        WHERE userId=@Id
-        ", new { Id = id }).ToList();
+            return _db.Query<Keep>(@"
+            SELECT * FROM keeps
+            WHERE userId=@Id
+            ", new { Id = id }).ToList();
+        }
+
+        public List<Keep> GetByVaultId(string id)
+        {
+            return _db.Query<Keep>(@"
+            SELECT * FROM vaultkeeps
+            JOIN keeps ON keeps.id = vaultkeeps.keepId
+            WHERE vaultId=@Id
+            ", new { Id = id}).ToList();
         }
     }
 }

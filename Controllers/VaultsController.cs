@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using keepr.Models;
 using keepr.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -8,10 +9,12 @@ namespace keepr.Controllers
     public class VaultsController
     {
         private readonly VaultsRepository _repo;
+        private readonly KeepsRepository _keepsRepo;
 
-        public VaultsController(VaultsRepository repo)
+        public VaultsController(VaultsRepository repo, KeepsRepository keepsRepo)
         {
             _repo = repo;
+            _keepsRepo = keepsRepo;
         }
 
         [HttpPost]
@@ -24,6 +27,12 @@ namespace keepr.Controllers
         public VaultKeep AssociateVaultAndKeep([FromBody] VaultKeep vaultKeep)
         {
             return _repo.AssociateVaultAndKeep(vaultKeep);
+        }
+
+        [HttpGet("{id}/keeps")]
+        public List<Keep> GetKeepsByVaultId(string id)
+        {
+            return _keepsRepo.GetByVaultId(id);
         }
     }
 }
