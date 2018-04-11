@@ -84,9 +84,10 @@
       viewKeep() {
         console.log(`View keep ${this.keep.name}`)
         // Increment keep's viewCount
+        this.keep.viewCount++
+        this.$store.dispatch('updateKeep', this.keep)
       },
       shareKeep() {
-        // Increment keep's shareCount
         this.keep.shareCount++
         this.$store.dispatch('updateKeep', this.keep)
         // This method will have to change...
@@ -104,8 +105,8 @@
           KeepId: this.keep.id,
           UserId: this.$store.state.user.id
         }
+        this.keep.keepCount++
         this.$store.dispatch('saveKeepToVault', Ids)
-        // Increment keep's keepCount
       }
     }
   }
