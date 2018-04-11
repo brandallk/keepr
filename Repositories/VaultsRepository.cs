@@ -46,6 +46,18 @@ namespace keepr.Repositories
             ", new { Id = id }).ToList();
         }
 
+        public Vault FindOneAndUpdate(int id, Vault vault)
+        {
+            return _db.QueryFirstOrDefault<Vault>($@"
+            UPDATE vaults SET
+                Name=@Name,
+                Description=@Description,
+                UserId=@UserId
+            WHERE Id = {id};
+            SELECT * FROM vaults WHERE Id = {id}
+            ", vault);
+        }
+
         public string DeleteOne(int id)
         {
             var rowsAffected = _db.Execute(@"

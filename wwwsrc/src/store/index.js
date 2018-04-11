@@ -261,6 +261,17 @@ var store = new Vuex.Store({
       })
     },
 
+    updateVault({commit, dispatch}, vault) {
+      api.put(`vaults/${vault.id}`, vault)
+      .then(res => {
+        var updatedVault = res.data
+        console.log('Updated vault:', updatedVault)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+
     getMyVaults({commit, dispatch}, userId) {
       api.get(`users/${userId}/vaults`)
       .then(res => {

@@ -46,9 +46,8 @@
       },
       submit() {
         if (!this.formDefaults) {
-          console.log('this.form', this.form)
           this.$store.dispatch('login', this.form)
-          this.$emit('closeLoginModal')
+          this.cancel()
         }
       }
     }

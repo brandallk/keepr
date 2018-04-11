@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace keepr.Controllers
 {
     [Route("api/[controller]")]
-    public class VaultsController
+    public class VaultsController : Controller
     {
         private readonly VaultsRepository _repo;
         private readonly KeepsRepository _keepsRepo;
@@ -33,6 +33,16 @@ namespace keepr.Controllers
         public List<Keep> GetKeepsByVaultId(string id)
         {
             return _keepsRepo.GetByVaultId(id);
+        }
+
+        [HttpPut("{id}")]
+        public Vault Update(int id, [FromBody] Vault vault)
+        {
+            if (ModelState.IsValid)
+            {
+                return _repo.FindOneAndUpdate(id, vault);
+            }
+            return null;
         }
 
         [HttpDelete("{id}")]
