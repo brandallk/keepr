@@ -13,6 +13,10 @@
 
     </div>
 
+    <div class="vault-description text-center">
+      <p>{{selectedVault.description}}</p>
+    </div>
+
     <keeps-wall :keeps="keepsInActiveVault"></keeps-wall>
 
   </div>
