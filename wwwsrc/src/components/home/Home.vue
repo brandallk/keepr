@@ -14,7 +14,7 @@
         </div>
       </div>
 
-      <keeps-wall v-if="homeBody == 'my-keeps'" :keeps="myKeeps"></keeps-wall>
+      <keeps-wall v-if="homeBody == 'my-keeps'" :keeps="myKeeps" :allowEdits="true"></keeps-wall>
 
       <create-keep-form v-if="homeBody == 'new-keep'"></create-keep-form>
 
@@ -77,12 +77,12 @@
       },
       myPrivateKeeps() {
         return this.$store.state.myKeeps.filter(keep => {
-          return keep.public === 1
+          return keep.public === 0
         })
       },
       myPublicKeeps() {
         return this.$store.state.myKeeps.filter(keep => {
-          return keep.public === 0
+          return keep.public === 1
         })
       }
     },

@@ -61,7 +61,7 @@
       submit() {
         var formData = this.form
         formData.UserId = this.$store.state.user.id
-        formData.Public = this.form.Public === false ? 0 : 1
+        formData.Public = this.form.Public ? 1 : 0
         formData.KeepCount = 0
         formData.ShareCount = 0
         formData.ViewCount = 0
@@ -72,7 +72,6 @@
         }
 
         this.$store.dispatch('createKeep', formData)
-
         this.cancel()
       },
       cancel() {

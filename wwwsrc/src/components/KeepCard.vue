@@ -11,6 +11,12 @@
 
     <div class="overlay" v-if="showOverlay">
 
+      <div class="update-icon" v-if="allowEdits">
+        <a href="#" class="text-light" @click.prevent="showKeepEditForm = true" title="Edit">
+            <i class="fas fa-edit fa-2x"></i>
+        </a>
+      </div>
+
       <div class="delete-icon" v-if="allowDeletesFromVault">
         <a href="#" class="text-danger" @click.prevent="removeKeepFromVault" title="Remove from vault">
           <i class="fas fa-times-circle fa-2x"></i>
@@ -53,24 +59,30 @@
       </div>
     </div>
 
+    <keep-edit-form v-if="showKeepEditForm" :keep="keep" v-on:closeKeepEditForm="showKeepEditForm = false"></keep-edit-form>
+
   </div>
 </template>
 
 <script>
   import VaultDropdown from './VaultDropdown'
+  import KeepEditForm from './KeepEditForm'
   export default {
     name: 'KeepCard',
     components: {
-      'vault-dropdown': VaultDropdown
+      'vault-dropdown': VaultDropdown,
+      'keep-edit-form': KeepEditForm
     },
     props: [
       'keep',
+      'allowEdits',
       'allowDeletesFromVault'
     ],
     data() {
       return {
         showOverlay: false,
-        showVaultDropdown: false
+        showVaultDropdown: false,
+        showKeepEditForm: false
       }
     },
     computed: {
@@ -82,6 +94,9 @@
       }
     },
     methods: {
+      // tags() {
+      //   // Get the tags belonging to this keep
+      // },
       activateOverlay() {
         this.showOverlay = true
       },
@@ -167,6 +182,12 @@
     position: absolute;
     left: 10%;
     bottom: -110%;
+  }
+
+  .update-icon {
+    position: absolute;
+    top: 5%;
+    left: 5%;
   }
 
   .delete-icon {
