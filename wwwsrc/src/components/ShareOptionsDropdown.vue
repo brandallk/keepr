@@ -4,8 +4,8 @@
       <div class="form-group">
         <select class="form-control" name="share-option-select" v-model="selectedOption" @change="selectOption" @click.stop="noop">
           <option value="" disabled selected>choose</option>
-          <option :value="'https://www.facebook.com/sharer/sharer.php?u=' + keep.link">Facebook</option>
-          <option :value="'https://twitter.com/intent/tweet?url=' + keep.link + '&text=TEXT&via=YOURTWITTERACCOUNTNAME'">Twitter</option>
+          <option value="facebook">Facebook</option>
+          <option value="twitter">Twitter</option>
         </select>
       </div>
   
@@ -31,12 +31,17 @@
       methods: {
         noop(){},
         selectOption() {
-          // IN PROGRESS: Need to diagnose use of the Facebook & Twitter links
           console.log('share via this.selectedOption:', this.selectedOption)
-          this.$router.push(this.selectedOption)
+          if (this.selectedOption === "facebook") {
+            window.open('//www.facebook.com/sharer/sharer.php?u=' + this.keep.link, 'facebook-popup', 'height=350,width=600')
+          }
+          if (this.selectedOption === "twitter") {
+            window.open('//twitter.com/share?url=' + this.keep.link, 'twitter-popup', 'height=350,width=600')
+          }
           this.keep.shareCount++
           this.$store.dispatch('updateKeep', this.keep)
           // need to .then $emit to do this.showShareOptionsDropdown=false on KeepCard.vue parent
+          this.$emit('closeShareOptionsDropdown')
         }
       }
     }

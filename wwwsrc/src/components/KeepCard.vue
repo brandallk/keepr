@@ -51,7 +51,7 @@
         <span class="col-12 text-center">share</span>
 
         <div class="share-options-dropdown" v-if="showShareOptionsDropdown">
-          <share-options-dropdown :keep="keep"></share-options-dropdown>
+          <share-options-dropdown :keep="keep" v-on:closeShareOptionsDropdown="showShareOptionsDropdown = false"></share-options-dropdown>
         </div>
 
       </div>
