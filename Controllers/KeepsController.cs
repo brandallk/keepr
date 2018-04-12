@@ -9,10 +9,12 @@ namespace keepr.Controllers
     public class KeepsController : Controller
     {
         private readonly KeepsRepository _repo;
+        private readonly TagsRepository _tagsRepo;
 
-        public KeepsController(KeepsRepository repo)
+        public KeepsController(KeepsRepository repo, TagsRepository tagsRepo)
         {
             _repo = repo;
+            _tagsRepo = tagsRepo;
         }
 
         [HttpPost]
@@ -29,6 +31,15 @@ namespace keepr.Controllers
         public List<Keep> GetPublicKeeps()
         {
             return _repo.GetPublicKeeps();
+        }
+
+        [HttpGet("search/{query}")]
+        public List<Keep> GetKeepsByQuery(string query)
+        {
+            List<Keep> results = new List<Keep>();
+            results.AddRange(_repo.FindByQueryString(query.ToLower()));
+            results.AddRange(_repo.FindByTagQuery(query.ToLower()));
+            return results;
         }
 
         [HttpPut("{id}")]

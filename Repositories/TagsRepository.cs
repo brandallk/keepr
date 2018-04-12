@@ -13,10 +13,10 @@ namespace keepr.Repositories
         public Tag CreateOne(Tag tag)
         {
             int id = _db.ExecuteScalar<int>(@"
-            INSERT INTO tags (Name)
-            VALUES (@Name);
+            INSERT INTO tags (tagName)
+            VALUES (@TagName);
             SELECT id FROM tags
-            WHERE name=@Name
+            WHERE tagName=@TagName
             ", tag);
 
             tag.Id = id;
@@ -25,7 +25,7 @@ namespace keepr.Repositories
 
         public Tag GetOneByName(string tagname)
         {
-            return _db.QueryFirstOrDefault<Tag>(@"SELECT * FROM tags WHERE name=@Name", new { Name = tagname });
+            return _db.QueryFirstOrDefault<Tag>(@"SELECT * FROM tags WHERE tagName=@TagName", new { TagName = tagname });
         }
     }
 }

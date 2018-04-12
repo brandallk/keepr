@@ -128,14 +128,7 @@
         }
       },
       shareKeep() {
-        // this.keep.shareCount++
-        // this.$store.dispatch('updateKeep', this.keep)
-        // This method will have to change...
-        // 1. Show the share-options dropdown
         this.toggleShareOptionsDropdown()
-        // 2. The dropdown will have a separate @change method (and @click.stop="noop")
-        //   a. The @change will do the incrementing of the keep's shareCount
-        //   b. It will also implement the 3rd-party sharing via Facebook or Twitter
       },
       deleteKeep() {
         this.$store.dispatch('deleteKeep', this.keep)

@@ -52,6 +52,48 @@ namespace keepr.Repositories
             ", new { Id = id}).ToList();
         }
 
+        public List<Keep> FindByQueryString(string query)
+        {
+            return _db.Query<Keep>(@"
+            SELECT * FROM keeps
+            WHERE name LIKE @Query
+            OR description LIKE @Query
+            OR imageUrl LIKE @Query
+            OR link LIKE @Query
+            ", new { Query = '%' + query + '%' }).ToList();
+        }
+
+        public List<Keep> FindByTagQuery(string query)
+        {
+            var rawResults = _db.Query<TagQueryResult>(@"
+            SELECT * FROM keeps
+            JOIN keeptags ON keeptags.keepId = keeps.id
+            JOIN tags ON tags.id = keeptags.tagId
+            WHERE tagname LIKE @Query
+            ", new { Query = '%' + query + '%' }).ToList();
+
+            List<Keep> keeps = new List<Keep>();
+
+            foreach (TagQueryResult result in rawResults)
+            {
+                Keep keep = new Keep() {
+                    Id = result.Id,
+                    Name = result.Name,
+                    Description = result.Description,
+                    UserId = result.UserId,
+                    ImageUrl = result.ImageUrl,
+                    Link = result.Link,
+                    Public = result.Public,
+                    KeepCount = result.KeepCount,
+                    ShareCount = result.ShareCount,
+                    ViewCount = result.ViewCount
+                };
+                keeps.Add(keep);
+            }
+
+            return keeps;
+        }
+
         public Keep FindOneAndUpdate(int id, Keep keep)
         {
             return _db.QueryFirstOrDefault<Keep>($@"

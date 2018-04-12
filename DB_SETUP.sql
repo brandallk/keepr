@@ -43,7 +43,7 @@ CREATE TABLE keeps (
 -- new
 CREATE TABLE tags (
   id int NOT NULL AUTO_INCREMENT,
-  name VARCHAR(255) NOT NULL,
+  tagname VARCHAR(255) NOT NULL,
   PRIMARY KEY (id)
 );
 

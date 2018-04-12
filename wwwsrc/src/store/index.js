@@ -309,7 +309,7 @@ var store = new Vuex.Store({
             console.log('existingTag', existingTag)
             // if it doesn't, create a new tag
             if (!existingTag) {
-              api.post('tags', { Name: tag })
+              api.post('tags', { TagName: tag })
               .then(res => {
                 var newTag = res.data
                 console.log('new tag', newTag)
@@ -361,6 +361,18 @@ var store = new Vuex.Store({
         var publicKeeps = res.data
         console.log('PublicKeeps from DB:', publicKeeps)
         commit('setPublicKeeps', publicKeeps)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+
+    searchKeeps({commit, dispatch}, query) {
+      api.get(`keeps/search/${query}`)
+      .then(res => {
+        var searchResults = res.data
+        console.log('search restuls:', searchResults)
+        commit('setPublicKeeps', searchResults)
       })
       .catch(err => {
         console.log(err)

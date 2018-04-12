@@ -3,6 +3,8 @@
 
     <navbar></navbar>
 
+    <search-bar></search-bar>
+
     <keeps-wall :keeps="publicKeeps"></keeps-wall>
   
   </div>
@@ -11,11 +13,13 @@
 
 <script>
   import Navbar from './Navbar'
+  import SearchBar from './SearchBar'
   import KeepsWall from './KeepsWall'
   export default {
     name: 'Welcome',
     components: {
       'navbar': Navbar,
+      'search-bar': SearchBar,
       'keeps-wall': KeepsWall
     },
     mounted() {
