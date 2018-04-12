@@ -68,5 +68,22 @@ namespace keepr.Repositories
             SELECT * FROM keeps WHERE Id = {id}
             ", keep);
         }
+
+        public string DeleteOne(int id)
+        {
+            var rowsAffected = _db.Execute(@"
+            DELETE FROM keeps
+            WHERE id=@Id
+            ", new { Id = id });
+
+            if (rowsAffected > 0)
+            {
+                return "Successfully deleted keep";
+            }
+            else
+            {
+                return "Failed to delete keep";
+            }
+        }
     }
 }

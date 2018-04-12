@@ -417,6 +417,18 @@ var store = new Vuex.Store({
       .catch(err => {
         console.log(err)
       })
+    },
+
+    deleteKeep({commit, dispatch}, keep) {
+      api.delete(`keeps/${keep.id}`)
+      .then(res => {
+        var result = res
+        console.log(result)
+        dispatch('getMyKeeps', keep.userId)
+      })
+      .catch(err => {
+        console.log(err)
+      })
     }
   
   }

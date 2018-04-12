@@ -23,6 +23,12 @@
         </a>
       </div>
 
+      <div class="delete-icon" v-if="!keep.public && !allowDeletesFromVault">
+        <a href="#" class="text-danger" @click.prevent="deleteKeep" title="Delete keep">
+          <i class="fas fa-times-circle fa-2x"></i>
+        </a>
+      </div>
+
       <a :href="keep.link" @click="viewKeep">
         <div class="overlay-icon view-icon row">
           <i class="fas fa-eye fa-2x col-12"></i>
@@ -117,6 +123,9 @@
         // 2. The dropdown will have a separate @change method (and @click.stop="noop")
         //   a. The @change will do the incrementing of the keep's shareCount
         //   b. It will also implement the 3rd-party sharing via Facebook or Twitter
+      },
+      deleteKeep() {
+        this.$store.dispatch('deleteKeep', this.keep)
       },
       toggleVaultDropdown() {
         this.showVaultDropdown = this.showVaultDropdown ? false : true

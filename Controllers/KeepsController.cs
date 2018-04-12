@@ -40,5 +40,11 @@ namespace keepr.Controllers
             }
             return null;
         }
+
+        [HttpDelete("{id}")]
+        public string Delete(int id)
+        {
+            return _repo.DeleteOne(id);
+        }
     }
 }
