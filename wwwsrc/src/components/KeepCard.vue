@@ -40,7 +40,7 @@
         <i class="fas fa-check-circle fa-2x col-12"></i>
         <span class="col-12 text-center">save to vault</span>
 
-        <div class="vault-dropdown" v-if="showVaultDropdown" >
+        <div class="vault-dropdown" v-if="showVaultDropdown">
           <vault-dropdown :vaults="myVaults" :showDropdownLabel="false" v-on:selectVault="saveKeepToVault"></vault-dropdown>
         </div>
 
@@ -49,6 +49,11 @@
       <div class="overlay-icon share-icon row" @click="shareKeep">
         <i class="fas fa-share fa-2x col-12"></i>
         <span class="col-12 text-center">share</span>
+
+        <div class="share-options-dropdown" v-if="showShareOptionsDropdown">
+          <share-options-dropdown :keep="keep"></share-options-dropdown>
+        </div>
+
       </div>
 
     </div>
@@ -72,11 +77,13 @@
 
 <script>
   import VaultDropdown from './VaultDropdown'
+  import ShareOptionsDropdown from './ShareOptionsDropdown'
   import KeepEditForm from './KeepEditForm'
   export default {
     name: 'KeepCard',
     components: {
       'vault-dropdown': VaultDropdown,
+      'share-options-dropdown': ShareOptionsDropdown,
       'keep-edit-form': KeepEditForm
     },
     props: [
@@ -88,7 +95,8 @@
       return {
         showOverlay: false,
         showVaultDropdown: false,
-        showKeepEditForm: false
+        showKeepEditForm: false,
+        showShareOptionsDropdown: false
       }
     },
     computed: {
@@ -110,16 +118,21 @@
         this.showOverlay = false
       },
       viewKeep() {
-        console.log(`View keep ${this.keep.name}`)
-        // Increment keep's viewCount
         this.keep.viewCount++
         this.$store.dispatch('updateKeep', this.keep)
       },
+      toggleShareOptionsDropdown() {
+        this.showShareOptionsDropdown = this.showShareOptionsDropdown ? false : true
+        if (this.showVaultDropdown) {
+          this.showVaultDropdown = false
+        }
+      },
       shareKeep() {
-        this.keep.shareCount++
-        this.$store.dispatch('updateKeep', this.keep)
+        // this.keep.shareCount++
+        // this.$store.dispatch('updateKeep', this.keep)
         // This method will have to change...
         // 1. Show the share-options dropdown
+        this.toggleShareOptionsDropdown()
         // 2. The dropdown will have a separate @change method (and @click.stop="noop")
         //   a. The @change will do the incrementing of the keep's shareCount
         //   b. It will also implement the 3rd-party sharing via Facebook or Twitter
@@ -129,6 +142,9 @@
       },
       toggleVaultDropdown() {
         this.showVaultDropdown = this.showVaultDropdown ? false : true
+        if (this.showShareOptionsDropdown) {
+          this.showShareOptionsDropdown = false
+        }
       },
       saveKeepToVault(vault) {
         var Ids = {
@@ -183,13 +199,20 @@
     text-decoration: none;
   }
 
-  .keep-icon {
+  .keep-icon,
+  .share-icon {
     position: relative;
   }
   .vault-dropdown {
     z-index: 1;
     position: absolute;
     left: 10%;
+    bottom: -110%;
+  }
+  .share-options-dropdown {
+    z-index: 1;
+    position: absolute;
+    left: -10%;
     bottom: -110%;
   }
 
