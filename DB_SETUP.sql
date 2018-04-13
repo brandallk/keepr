@@ -25,7 +25,6 @@ CREATE TABLE keeps (
   description VARCHAR(255) NOT NULL,
   userId VARCHAR(255),
 
-  -- new
   imageUrl TEXT NOT NULL,
   link VARCHAR(255) NOT NULL,
   public TINYINT(1) NOT NULL,
@@ -40,14 +39,12 @@ CREATE TABLE keeps (
   PRIMARY KEY (id)
 );
 
--- new
 CREATE TABLE tags (
   id int NOT NULL AUTO_INCREMENT,
   tagname VARCHAR(255) NOT NULL,
   PRIMARY KEY (id)
 );
 
--- new
 CREATE TABLE keeptags (
   id int NOT NULL AUTO_INCREMENT,
   keepId int NOT NULL,

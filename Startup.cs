@@ -17,12 +17,13 @@ namespace keepr
 {
     public class Startup
     {
-        private readonly string _connectionString;
+        // private readonly string _connectionString;
 
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            _connectionString = configuration.GetSection("DB").GetValue<string>("MySQLConnectionString");
+            // _connectionString = configuration.GetSection("DB").GetValue<string>("MySQLConnectionString");
+            // _connectionString = "server=sql3.freemysqlhosting.net;port=3306;database=sql3232283;user id=sql3232283;password=Ke5NLMtrwm";
         }
 
         public IConfiguration Configuration { get; }
@@ -63,7 +64,8 @@ namespace keepr
 
         private IDbConnection CreateDbContext()
         {
-            var connection = new MySqlConnection(_connectionString);
+            // var connection = new MySqlConnection(_connectionString);
+            var connection = new MySqlConnection("server=sql3.freemysqlhosting.net;port=3306;database=sql3232283;user id=sql3232283;password=Ke5NLMtrwm");
             connection.Open();
             return connection;
         }
